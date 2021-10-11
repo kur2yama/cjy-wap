@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>政情</title>
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/css/laypage.css"/>
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/political/political.css?2021"/>
+    <script type="text/javascript" src="//res.cjyun.org/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/base.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/echo.min.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/vue.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/laypage.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/political/mc.js"></script>
+</head>
+<body>
+<div id="app">
+    <img class="banner" src="//img.cjyun.org/a/thumb/10008/202005/944078b5965b2488d431dcd4814d169d.jpg!w480_h270.jpg" alt="">
+    <!--    应勇-->
+    <div>
+        <div class="card">
+            <img src="//img.cjyun.org/a/10008/202004/581e58995c4819f712182b76f5d50f13.jpg" alt="">
+            <div class="resume">
+                <span>应勇</span>
+                <p>十九届中央委员、湖北省委书记、省人大常委会主任</p>
+            </div>
+            <div class="check-resume" @click="mc.pushLinkViewController('http://m.hbtv.com.cn/app/political/10008/3')">
+                查看简历 >
+            </div>
+        </div>
+        <div class="news">
+            <div class="panel-top">
+                <span>最新资讯</span>
+                <span @click="mc.pushLinkViewController('http://m.hbtv.com.cn/politicallist?id=2363')">更多 ></span>
+            </div>
+        </div>
+        <div class="contentList">
+            <ul>
+                {list id="2363" page="1" pagesize="2"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+    <!--    王忠林-->
+    <div>
+        <div class="card">
+            <img src="//img.cjyun.org/a/10008/202004/44ba0921fb47684d7cbf54c15181750a.jpg" alt="">
+            <div class="resume">
+                <span>王忠林</span>
+                <p>湖北省委副书记，省政府省长、党组书记</p>
+            </div>
+            <div class="check-resume" @click="mc.pushLinkViewController('http://m.hbtv.com.cn/app/political/10008/11')">
+                查看简历 >
+            </div>
+        </div>
+        <div class="news">
+            <div class="panel-top">
+                <span>最新资讯</span>
+                <span @click="mc.pushLinkViewController('http://m.hbtv.com.cn/politicallist?id=2372')">更多 ></span>
+            </div>
+        </div>
+        <div class="contentList">
+            <ul>
+                {list id="2372" page="1" pagesize="2"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+    <!--    黄楚平-->
+    <div>
+        <div class="card">
+            <img src="//img.cjyun.org/a/10008/202004/b73df326688e96df1e225bf4ad0ef71d.jpg" alt="">
+            <div class="resume">
+                <span>黄楚平</span>
+                <p>湖北省政协主席、党组书记</p>
+            </div>
+            <div class="check-resume" @click="mc.pushLinkViewController('http://m.hbtv.com.cn/app/political/10008/5')">
+                查看简历 >
+            </div>
+        </div>
+        <div class="news">
+            <div class="panel-top">
+                <span>最新资讯</span>
+                <span @click="mc.pushLinkViewController('http://m.hbtv.com.cn/politicallist?id=2366')">更多 ></span>
+            </div>
+        </div>
+        <div class="contentList">
+            <ul>
+                {list id="2366" page="1" pagesize="2"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+    <!--    尔肯江·吐拉洪-->
+    <div>
+        <div class="card">
+            <img src="http://img.cjyun.org/a/10008/202004/35b959b778b84a13c36fd117839435d6.jpg" alt="">
+            <div class="resume">
+                <span>尔肯江·吐拉洪</span>
+                <p>湖北省委常委、统战部部长</p>
+            </div>
+            <div class="check-resume" @click="mc.pushLinkViewController('http://m.hbtv.com.cn/app/political/10008/4')">
+                查看简历 >
+            </div>
+        </div>
+        <div class="news">
+            <div class="panel-top">
+                <span>最新资讯</span>
+                <span @click="mc.pushLinkViewController('http://m.hbtv.com.cn/politicallist?id=2365')">更多 ></span>
+            </div>
+        </div>
+        <div class="contentList">
+            <ul>
+                {list id="2365" page="1" pagesize="2"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+    <!--    王艳玲-->
+    <div>
+        <div class="card">
+            <img src="//img.cjyun.org/a/10008/202004/2546b2324b750187b05569bb568a037a.jpg" alt="">
+            <div class="resume">
+                <span>王艳玲</span>
+                <p>湖北省委常委、省委政法委书记</p>
+            </div>
+            <div class="check-resume" @click="mc.pushLinkViewController('http://m.hbtv.com.cn/app/political/10008/7')">
+                查看简历 >
+            </div>
+        </div>
+        <div class="news">
+            <div class="panel-top">
+                <span>最新资讯</span>
+                <span @click="mc.pushLinkViewController('http://m.hbtv.com.cn/politicallist?id=2368')">更多 ></span>
+            </div>
+        </div>
+        <div class="contentList">
+            <ul>
+                {list id="2368" page="1" pagesize="2"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+    <!--    李荣灿-->
+    <div>
+        <div class="card">
+            <img src="//img.cjyun.org/a/10008/202105/52ea7421261716798becc8d481d8b43b.jpeg" alt="">
+            <div class="resume">
+                <span>李荣灿</span>
+                <p>湖北省委常委、省委组织部部长</p>
+            </div>
+            <div class="check-resume" @click="mc.pushLinkViewController('http://m.hbtv.com.cn/app/political/10008/14')">
+                查看简历 >
+            </div>
+        </div>
+        <div class="news">
+            <div class="panel-top">
+                <span>最新资讯</span>
+                <span @click="mc.pushLinkViewController('http://m.hbtv.com.cn/politicallist?id=2826')">更多 ></span>
+            </div>
+        </div>
+        <div class="contentList">
+            <ul>
+                {list id="2826" page="1" pagesize="2"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+    <!--    侯淅珉-->
+    <div>
+        <div class="card">
+            <img src="//img.cjyun.org/a/10008/202105/74f0442453992307545bd694f14dec0f.jpg" alt="">
+            <div class="resume">
+                <span>侯淅珉</span>
+                <p>湖北省委常委、省纪委书记</p>
+            </div>
+            <div class="check-resume" @click="mc.pushLinkViewController('http://m.hbtv.com.cn/app/political/10008/15')">
+                查看简历 >
+            </div>
+        </div>
+        <div class="news">
+            <div class="panel-top">
+                <span>最新资讯</span>
+                <span @click="mc.pushLinkViewController('http://m.hbtv.com.cn/politicallist?id=2877')">更多 ></span>
+            </div>
+        </div>
+        <div class="contentList">
+            <ul>
+                {list id="2877" page="1" pagesize="2"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+    <!--    李乐成-->
+    <div>
+        <div class="card">
+            <img src="//img.cjyun.org/a/10008/202004/a70f8d690e0165cfce76be3e7effda43.jpeg" alt="">
+            <div class="resume">
+                <span>李乐成</span>
+                <p>湖北省委常委，省政府常务副省长</p>
+            </div>
+            <div class="check-resume" @click="mc.pushLinkViewController('http://m.hbtv.com.cn/app/political/10008/12')">
+                查看简历 >
+            </div>
+        </div>
+        <div class="news">
+            <div class="panel-top">
+                <span>最新资讯</span>
+                <span @click="mc.pushLinkViewController('http://m.hbtv.com.cn/politicallist?id=2373')">更多 ></span>
+            </div>
+        </div>
+        <div class="contentList">
+            <ul>
+                {list id="2373" page="1" pagesize="2"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+    <!--    郭元强-->
+    <div>
+        <div class="card">
+            <img src="//img.cjyun.org/a/10008/202110/fb83a4031f323c77a12ff43a03c4b113.jpeg" alt="">
+            <div class="resume">
+                <span>郭元强</span>
+                <p>湖北省委常委、武汉市委书记</p>
+            </div>
+        </div>
+        <div class="news">
+            <div class="panel-top">
+                <span>最新资讯</span>
+                <!--在这改-->
+                <span @click="mc.pushLinkViewController('http://m.hbtv.com.cn/politicallist?id=2373')">更多 ></span>
+            </div>
+        </div>
+        <div class="contentList">
+            <ul>
+                {list id="2373" page="1" pagesize="2"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+    <!--    许正中-->
+    <div>
+        <div class="card">
+            <img src="//img.cjyun.org/a/10008/202007/5810921a327874ef824fc39ea77309cb.png" alt="">
+            <div class="resume">
+                <span>许正中</span>
+                <p>湖北省委常委、省委宣传部部长</p>
+            </div>
+            <div class="check-resume" @click="mc.pushLinkViewController('http://m.hbtv.com.cn/app/political/10008/13')">
+                查看简历 >
+            </div>
+        </div>
+        <div class="news">
+            <div class="panel-top">
+                <span>最新资讯</span>
+                <span @click="mc.pushLinkViewController('http://m.hbtv.com.cn/politicallist?id=2414')">更多 ></span>
+            </div>
+        </div>
+        <div class="contentList">
+            <ul>
+                {list id="2414" page="1" pagesize="2"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {}
+        },
+        created() {
+
+        },
+        mounted() {
+            this.echoInit()
+        },
+        methods: {
+            echoInit() {
+                Echo.init({
+                    offset: 0,
+                    throttle: 0
+                });
+            },
+        }
+
+    })
+</script>
+</html>

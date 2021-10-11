@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"  />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>{$menu['title']}-{$site['title']}</title>
+    <meta name="keywords" content="{$menu['keyword']}" />
+    <meta name="description" content="{$menu['description']}" />
+    <link rel="stylesheet" href="{$resource}/assets/css/common.css"/>
+    <link rel="stylesheet" href="{$resource}/assets/templates/wap/default/css/touch.css"/>
+    <!--{if isset($color) && !empty($color)}-->
+    <link rel="stylesheet" href="{$resource}/assets/templates/wap/default/css/color/<?=$color?>.css"/>
+    <!--{/if}-->
+    <script src="{$assets}/js/laypage.js"></script>
+    <script type="text/javascript" src="{$resource}/assets/js/jquery.js"></script>
+</head>
+<body>
+<div class="g-container">
+    <!-- 头部 -->
+    <header id="touchBox">
+        <!--{template 'shared/menu'}-->
+    </header>
+    <style type="text/css">
+        /*search info*/
+        .search-wd { color: #444;}
+        .search-wd div {display: inline; font-size: 14px; margin-right: 15px;}
+        .search-wd span {color: #f0352b;}
+        /*list*/
+        .search-container .title { font-size: 12px; color: #333;}
+        .search-container li {margin: 5px 0px; overflow: hidden; max-height: 125px;}
+        .search-container .infos {margin-top: 10px; color: #444; overflow: hidden; border-bottom: 1px solid #e5e5e5;}
+        .search-container .thumb {max-height: 105px; float: left; margin-right: 10px; overflow: hidden}
+        .search-container .thumb img {max-width: 100%; max-height: 100%}
+        .search-container .description {height: 20px; overflow: hidden; display: block;word-wrap: normal;/*for IE */text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+        .search-container .published {color: #999; margin-top: 10px; display: block;padding-left: 90px;}
+        .search-container em {color: red}
+
+        /*page*/
+
+        .laypage_main{font-size:0; clear:both; color:#666;}
+        .laypage_main *{display:inline-block; vertical-align: top; font-size:12px;}
+        .laypage_main a{height:26px; line-height:26px; text-decoration:none; color:#666;}
+        .laypage_main a, .laypage_main span{margin:0 3px 6px; padding:0 10px;}
+        .laypage_main span{height:26px; line-height:26px;}
+        .laypage_main input, .laypage_main button{ border:1px solid #ccc; background-color:#fff;}
+        .laypage_main input{width:40px; height:26px; line-height:26px; margin:0 5px; padding:0 5px;}
+        .laypage_main button{height:28px; line-height:28px; margin-left:5px; padding:0 10px; color:#666;}
+
+        .laypageskin_default{color:#333}
+        .laypageskin_default a, .laypageskin_yahei span{padding:0 13px; border-radius:2px; background-color: #eee;}
+        .laypageskin_default .laypage_curr{background-color:#333; color:#fff;}
+    </style>
+    <!-- 文章列表 -->
+    <section class="m-list" style="padding:10px;">
+        <div class="search-wd"><div>"<span>{$wd}</span>"</div>搜索结果&nbsp;共&nbsp;{$total}&nbsp;个</div>
+        <div class="search-container">
+            <ul>
+                <!--{if $total > 0}-->
+                <!--{loop $list $data}-->
+
+                <?php
+                    $title = \Core\Core::strcut($data['_source']['title'], 30);
+                    $title = preg_replace('#('.$wd.')#', '<em>$1</em>', $title);
+                $description = \Core\Core::strcut($data['_source']['description'], 100);
+                $description = preg_replace('#('.$wd.')#', '<em>$1</em>', $description);
+                $row = \Core\Factory::table('content_detail')->get(array('contentid' => $data['_id']), true);
+                $url = $row['url'];
+                ?>
+                <li>
+                    <a href="{$url}">
+                        <p class="infos">
+                            <!--{if $data['_source']['thumb'] === 1}-->
+                            <?php
+                        $thumbUrl = json_decode($row['thumb'], true);
+                        $thumbUrl = $data['_source']['appid'] == 2 ? $thumbUrl[0] : $thumbUrl;
+                        ?>
+                            <!--{if $thumbUrl}-->
+                            <span class="thumb"><img width="80" height="60" src="<?=\Core\Core::thumb($thumbUrl, 160, 120)?>"/></span>
+                            <!--{/if}-->
+                            <!--{/if}-->
+                            <span class="description">{$title}</span>
+                            <span class="published">{$description}</span>
+                        </p>
+                    </a>
+                </li>
+                <!--{/loop}-->
+                <!--{/if}-->
+            </ul>
+        </div>
+        <div id="pages" style="margin-top:15px;"></div>
+    </section>
+
+    <footer class="g-cloumn">
+        <!--{template 'shared/client'}-->
+        <!--{template 'shared/footer'}-->
+    </footer>
+</div>
+<script>
+    // 初始显示导航
+    var defaultShowMenu = true;
+    var menuid = <?=$menu['id']?>+0;
+</script>
+<script>
+    var wd = '{$wd}';
+    var pagesize = {$pagesize};
+    var total = {$total};
+    var pages = Math.ceil(total/pagesize);
+    var alias = '<?= isset($alias) ? $alias : 'all'?>';
+    if (total > 0) {
+        laypage({
+            cont: document.getElementById('pages'),
+            pages: pages,
+            curr: function () {
+                var page = location.search.match(/page=(\d+)/);
+                return page ? page [1] : 1;
+            }(),
+            jump: function (e, first) {
+                if (!first) {
+                    location.href = '?alias=' + alias + '&wd=' + wd + '&page=' + e.curr;
+                }
+            },
+            groups: 5
+        });
+    }
+</script>
+<script type="text/javascript" src="{$resource}/assets/templates/wap/default/js/touch.js"></script>
+</body>
+</html>

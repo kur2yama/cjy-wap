@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>社区</title>
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/css/laypage.css"/>
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/community/css/community.css?20210930"/>
+    <script type="text/javascript" src="//res.cjyun.org/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/base.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/echo.min.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/vue.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/laypage.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="street-choose" @click="showSelect=!showSelect">
+        <img src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/community/images/community-icon1.png" alt="">
+        <span v-cloak>{{streetName}}</span>
+        <img src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/community/images/community-icon2.png" alt=""
+             :class="showSelect?'out_transform':'in_transform'">
+    </div>
+    <transition name="fade">
+        <div class="select-box" v-show="showSelect" v-cloak>
+            <div class="select-area">
+                <span :class="city==='wuhan'?'red':''" @click="city='wuhan';init();">武汉市</span>
+                <span :class="city=== 'other'?'red':''" @click="otherCityFn()">其他市区</span>
+            </div>
+            <div class="city" v-show="city==='other' && id!=2977">
+                <ul>
+                    <li v-for="item in cityList" :class="{active:otherCity===item}" @click="cityChoose(item)">{{item}}</li>
+                </ul>
+            </div>
+            <div class="area" v-show="city==='wuhan' || otherCity">
+                <ul>
+                    <li v-for="item in areaList" :class="{active:area===item.area}" @click="areaChoose(item)">{{item.area}}</li>
+                </ul>
+            </div>
+            <div class="street" v-show="area">
+                <ul>
+                    <li v-for="item in streetList" :class="{active:street===item.name}" @click="streetChoose(item)">{{item.name}}</li>
+                </ul>
+            </div>
+        </div>
+    </transition>
+    <div class="contentList" v-if="id">
+        <ul>
+            {list id="$_GET[id]" page="1" pagesize="999"}
+            <li class="list">
+                <a class="list-a" href="{$r['url']}"></a>
+                <!-- {if !empty($r['thumb'])} -->
+                <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                <!-- {/if} -->
+                <div class="title">
+                    <p>{$r['title']}</p>
+                    <span class="time2Text">{$r['time']}</span>
+                </div>
+            </li>
+            {/list}
+        </ul>
+    </div>
+    <div class="contentList" v-else>
+        <ul>
+            {list id="2978" page="1" pagesize="999"}
+            <li class="list">
+                <a class="list-a" href="{$r['url']}"></a>
+                <!-- {if !empty($r['thumb'])} -->
+                <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                <!-- {/if} -->
+                <div class="title">
+                    <p>{$r['title']}</p>
+                    <span class="time2Text">{$r['time']}</span>
+                </div>
+            </li>
+            {/list}
+        </ul>
+    </div>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                id: this.getQueryVariable("id"),
+                streetName: "选择社区",
+                showSelect: false,
+                city: "",
+                otherCity: "",
+                area: "",
+                street: "",
+                cityList: ["黄石市", "十堰市", "宜昌市", "襄阳市", "鄂州市", "荆门市", "孝感市", "荆州市", "黄冈市", "咸宁市", "随州市", "恩施土家", "仙桃市", "潜江市"],
+                areaList: [],
+                streetList: [],
+            }
+        },
+        created() {
+            $.getJSON("//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/community/community.json?2021", res => {
+                console.log(res)
+                this.areaList = res[0].city
+                res.forEach(j => {
+                    j.city.forEach(item => {
+                        item.street.forEach(i => {
+                            if (i.id == this.id) {
+                                this.street = i.name
+                                this.streetList = item.street
+                                this.area = item.area
+                                this.city = j.name
+                            }
+                        })
+                    })
+                })
+            })
+            if (this.id) {
+                this.streetName = decodeURIComponent(this.getQueryVariable("street_name"))
+                this.showSelect = false
+            }
+            if (this.id == 2977) {
+                this.city = "other"
+            }
+        },
+        mounted() {
+            this.echoInit()
+            this.time2Text()
+        },
+        methods: {
+            init() {
+                this.otherCity = ""
+                this.area = ""
+                this.street = ""
+            },
+            otherCityFn() {
+                // this.city = 'other';
+                // this.init();
+                location.href = `//m.hbtv.com.cn/community?id=2977&street_name=其它地市州`
+            },
+            cityChoose(item) {
+                // this.otherCity = item;
+            },
+            areaChoose(item) {
+                this.area = item.area;
+                this.streetList = item.street;
+            },
+            streetChoose(item) {
+                this.street = item.name;
+                location.href = `//m.hbtv.com.cn/community?id=${item.id}&street_name=${item.name}`
+            },
+            time2Text() {
+                var _this = this
+                $(".time2Text").each(function () {
+                    var time = $(this).text().replace(/-/g, '/');
+                    $(this).text(_this.before_time(new Date(time).getTime() / 1000));
+                })
+            },
+            echoInit() {
+                Echo.init({
+                    offset: 0,
+                    throttle: 0
+                });
+            },
+            //处理时间
+            before_time(dateTimeStamp) {
+                var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
+                var hour = minute * 60;
+                var day = hour * 24;
+                var week = day * 7;
+                var halfamonth = day * 15;
+                var month = day * 30;
+                var year = day * 365;
+                var now = new Date().getTime(); //获取当前时间毫秒
+                var diffValue = now - dateTimeStamp * 1000; //时间差
+                if (diffValue < 0) {
+                    return;
+                }
+                var minC = diffValue / minute; //计算时间差的分，时，天，周，月
+                var hourC = diffValue / hour;
+                var dayC = diffValue / day;
+                var weekC = diffValue / week;
+                var monthC = diffValue / month;
+                var yearC = diffValue / year;
+                var result
+                if (dayC >= 1 && dayC <= 7) {
+                    result = " " + parseInt(dayC) + "天前";
+                } else if (hourC >= 1 && hourC <= 24) {
+                    result = " " + parseInt(hourC) + "小时前";
+                } else if (minC >= 1 && minC <= 60) {
+                    result = " " + parseInt(minC) + "分钟前";
+                } else if (diffValue >= 0 && diffValue <= minute) {
+                    result = "刚刚";
+                } else {
+                    var datetime = new Date();
+                    datetime.setTime(dateTimeStamp * 1000);
+                    var Nyear = datetime.getFullYear();
+                    var Nmonth =
+                        datetime.getMonth() + 1 < 10
+                            ? "0" + (datetime.getMonth() + 1)
+                            : datetime.getMonth() + 1;
+                    var Ndate =
+                        datetime.getDate() < 10
+                            ? "0" + datetime.getDate()
+                            : datetime.getDate();
+                    var Nhour =
+                        datetime.getHours() < 10
+                            ? "0" + datetime.getHours()
+                            : datetime.getHours();
+                    var Nminute =
+                        datetime.getMinutes() < 10
+                            ? "0" + datetime.getMinutes()
+                            : datetime.getMinutes();
+                    var Nsecond =
+                        datetime.getSeconds() < 10
+                            ? "0" + datetime.getSeconds()
+                            : datetime.getSeconds();
+                    result = Nyear + "-" + Nmonth + "-" + Ndate;
+                }
+                return result;
+            },
+            getQueryVariable(variable) {
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) {
+                        return pair[1];
+                    }
+                }
+                return false;
+            },
+        }
+
+    })
+</script>
+</html>

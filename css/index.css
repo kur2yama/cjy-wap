@@ -1,0 +1,667 @@
+html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, blockquote, pre, hr, figure, table, caption, th, td, form, fieldset, legend, input, button, textarea, menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+img {
+    background: url(../images/loading.png) center no-repeat;
+    background-size: 100%;
+}
+
+header img, .menu img, .searchPage img, .toTop img, .g-container .overflowBox ul li .play, .g-container .panel-top > div > img {
+    background-image: none;
+}
+
+.hide {
+    display: none;
+}
+
+.shadow {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: .35rem;
+    background: linear-gradient(
+            180deg, rgba(70, 70, 70, 0) 0%, rgba(34, 34, 34, 0.46) 100%);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.list-a {
+    width: 100%;
+    height: 80%;
+    position: absolute;
+}
+
+.flexCenter {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.g-container {
+    position: relative;
+}
+
+.banScroll {
+    overflow: hidden;
+    height: 100vh;
+}
+
+#app {
+    padding: .96rem 0 .57rem;
+}
+
+.menuTemp {
+    min-height: calc(100vh - 1.53rem);
+}
+
+/*顶部轮播*/
+.topSlide {
+    padding: .15rem;
+}
+
+.topSlide .swiper-container {
+    width: 100%;
+    height: 1.94rem;
+    border-radius: .12rem;
+}
+
+.topSlide .swiper-slide {
+    text-align: center;
+    font-size: .18rem;
+    /*background: #e0bd9c;*/
+    background-size: 100% 100%;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    width: 4.14rem;
+    justify-content: left;
+    align-items: flex-end;
+    text-decoration: none;
+    transform:translate3d(0,0,0);
+    overflow:hidden;
+}
+
+.topSlide .swiper-slide p {
+    color: white;
+    margin: .15rem 0 0 .27rem;
+    max-width: 80%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.topSlide .swiper-container .swiper-pagination {
+    bottom: .12rem;
+    display: -webkit-flex;
+    display: flex;
+    width: 90%;
+    margin-left: 4%;
+}
+
+.topSlide .swiper-container .swiper-pagination .swiper-pagination-bullet {
+    flex: 1;
+    height: .04rem;
+    border-radius: 0;
+    background-color: #2b2b2b;
+}
+
+.topSlide .swiper-container .swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #fffdfb;
+}
+
+/*要闻  热点推荐*/
+.g-container .important-news, .g-container .hot-recommends {
+    font-size: .15rem;
+    padding: 0 .2rem;
+    position: relative;
+}
+
+.g-container .important-news .lookMore, .g-container .hot-recommends .lookMore {
+    position: absolute;
+    right: .18rem;
+    top: .05rem;
+    font-size: .12rem;
+    color: #999999;
+}
+
+.g-container .important-news .title, .g-container .hot-recommends .title {
+    position: relative;
+    font-weight: bold;
+    font-size: .17rem;
+}
+
+.g-container .important-news .title::after, .g-container .hot-recommends .title::after {
+    display: block;
+    content: "";
+    width: 100%;
+    height: .03rem;
+    background-color: #bd4a39;
+    position: absolute;
+    bottom: -.06rem;
+    left: 0;
+}
+
+.g-container .important-news ul.newsList, .g-container .hot-recommends ul.newsList {
+    margin-top: .05rem;
+    border-top: 1px solid #f7f7f7;
+    border-bottom: 1px solid #f7f7f7;
+}
+
+.g-container .important-news ul.newsList > li:not(:last-child), .g-container .hot-recommends ul.newsList > li:not(:last-child) {
+    border-bottom: 1px solid #f7f7f7;
+}
+
+.g-container .important-news ul.newsList > li, .g-container .hot-recommends ul.newsList > li {
+    padding: .13rem 0;
+}
+
+/*.contentList .panel-top > span:first-child {*/
+/*    position: relative;*/
+/*    padding-left: .24rem;*/
+/*}*/
+
+/*.contentList .panel-top > span:first-child::after {*/
+/*    display: block;*/
+/*    width: .19rem;*/
+/*    height: .19rem;*/
+/*    background-size: 100% 100%;*/
+/*    content: "";*/
+/*    left: 0;*/
+/*    top: .015rem;*/
+/*    position: absolute;*/
+/*}*/
+
+/*推荐*/
+.g-container .recommend {
+    background-color: #f7f8f9;
+    height: 2rem;
+    padding: .16rem;
+}
+
+.g-container .recommend .panel-box {
+    height: 100%;
+    background-color: white;
+    box-shadow: .02rem .02rem .05rem #e4e5e7;
+}
+
+.g-container .panel-top {
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .13rem .15rem;
+}
+
+.g-container .panel-top span:first-child, .g-container .panel-top > div {
+    color: #b74d3e;
+    font-size: .16rem;
+    font-weight: 500;
+}
+
+.g-container .panel-top > span:last-child {
+    font-size: .12rem;
+    color: #999999;
+}
+
+.g-container .panel-top > div {
+    display: flex;
+    align-items: center;
+}
+
+.g-container .panel-top > div > img {
+    width: .19rem;
+    height: .19rem;
+    margin-right: .04rem;
+}
+
+.g-container .recommend .panel-box > .swiper-container {
+    font-size: .14rem;
+    height: 1.52rem;
+}
+
+.g-container .recommend .panel-box .swiper-wrapper ul {
+    width: 100%;
+
+}
+
+.g-container .recommend .panel-box .swiper-wrapper ul li > a {
+    display: flex;
+}
+
+.g-container .recommend .panel-box .swiper-wrapper ul li .point {
+    font-size: 36px;
+}
+
+.g-container .recommend .panel-box .swiper-wrapper ul li .title {
+    max-width: 3.43rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.g-container .recommend .panel-box .swiper-wrapper ul li {
+    padding: 0 .1rem;
+    line-height: .26rem;
+}
+
+.g-container .recommend .panel-box .swiper-pagination {
+    bottom: .08rem;
+}
+
+
+.g-container .recommend .panel-box .swiper-pagination .swiper-pagination-bullet {
+    width: .04rem;
+    height: .04rem;
+    background-color: #b9baba;
+    opacity: 1;
+}
+
+.g-container .recommend .panel-box .swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #CC4134 !important;
+    width: .22rem;
+    height: .04rem;
+    border-radius: .04rem;
+}
+
+/*直播*/
+.g-container .live {
+    height: 1.54rem;
+    border-bottom: .01rem solid #eeeeee;
+}
+
+.g-container .overflowBox {
+    height: .9rem;
+    overflow: hidden;
+}
+
+.g-container .overflowBox ul {
+    width: 100%;
+    height: 110px;
+    color: #747373;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.g-container .overflowBox ul li {
+    height: .9rem;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    min-width: 1.4rem;
+    margin: 0 .02rem;
+    position: relative;
+    border-radius: .06rem;
+    overflow: hidden;
+}
+
+.g-container .overflowBox ul li:first-child {
+    margin-left: 10px;
+}
+
+.g-container .overflowBox ul li:last-child {
+    margin-right: 10px;
+}
+
+.g-container .overflowBox ul li .images {
+    width: 100%;
+    height: 100%;
+}
+
+.g-container .overflowBox ul li .play {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: .6rem;
+    opacity: .8;
+}
+
+.g-container .overflowBox ul li > p {
+    font-size: 14px;
+    position: absolute;
+    color: white;
+    bottom: .03rem;
+    left: .1rem;
+    font-weight: 500;
+    max-width: 1.3rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/*专题*/
+.g-container .special {
+    font-size: .16rem;
+    margin-bottom: .2rem;
+}
+
+.g-container .special .specialContainer {
+    padding: 5px 15px;
+}
+
+.g-container .special .special-swiper {
+    width: 100%;
+    height: 1.94rem;
+}
+
+.g-container .special .swiper-slide {
+    height: 1.94rem;
+    background-size: 100% 100%;
+}
+
+.g-container .special .swiper-slide p {
+    color: white;
+    position: absolute;
+    top: .08rem;
+    left: .25rem;
+    width: 100%;
+    text-align: center;
+    max-width: 3rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.g-container .special .swiper-pagination {
+    /*top: 172px;*/
+    bottom: 4px;
+}
+
+.g-container .special .swiper-pagination .swiper-pagination-bullet {
+    width: .04rem;
+    height: .04rem;
+    background-color: white;
+    opacity: 1;
+}
+
+.g-container .special .swiper-pagination .swiper-pagination-bullet-active {
+    background-color: #CC4134 !important;
+    width: .22rem;
+    height: .04rem;
+    border-radius: .2rem;
+}
+
+/*长江评论*/
+.g-container .river-comment {
+    border: 1px solid #f6f6f5;
+}
+
+.g-container .river-comment ul {
+    padding-bottom: .4rem;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.g-container .river-comment ul li {
+    width: 1.55rem;
+    height: 1.14rem;
+    border: 1px solid #dfdfe1;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    text-align: center;
+    position: relative;
+    margin: 0 .07rem !important;
+}
+
+.g-container .river-comment ul li p {
+    line-height: 28px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+    color: #2B2B2B;
+    left: .06rem;
+    bottom: 0;
+}
+
+.g-container .river-comment ul li:nth-child(2) {
+    margin: 0 .04rem;
+}
+
+.g-container .river-comment ul li img {
+    width: 100%;
+    height: 86px !important;
+}
+
+.river-comment .overflowBox {
+    height: 1.32rem;
+}
+
+/*民生动态*/
+.g-container .society {
+    /*border-bottom: 1px solid #f0f0f0;*/
+}
+
+.g-container .society ul {
+    padding: 0 15px 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.g-container .society .threePic {
+
+}
+
+.g-container .society .threePic li {
+    background-size: 100% 100%;
+    position: relative;
+}
+
+.g-container .society .threePic li:nth-child(1) {
+    width: 100%;
+    height: 190px;
+    margin-bottom: 10px;
+}
+
+.g-container .society .threePic li:nth-child(2) {
+    width: 49%;
+    height: 98px;
+    margin-right: 2%;
+}
+
+.g-container .society .threePic li:nth-child(3) {
+    width: 49%;
+    height: 98px;
+}
+
+.g-container .society .threePic li p {
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    position: absolute;
+    bottom: .08rem;
+    text-indent: .4em;
+
+}
+
+/*健康,教育，文旅...*/
+.contentList {
+
+}
+
+.contentList ul {
+    padding-left: 14px;
+    margin-top: -10px;
+}
+
+.contentList ul .list {
+    border-bottom: 1px solid #f0f0f0;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.contentList ul .list > img {
+    width: 110px;
+    height: 62px;
+    border-radius: 4%;
+}
+
+.contentList ul .list .title {
+    flex: 1;
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentList ul .list .title > p {
+    font-size: 15px;
+    margin-bottom: 6px;
+    width: 90%;
+    min-height: 42px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.contentList ul .list .title > span {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.lad ul .list:last-child {
+    border-bottom: none;
+}
+
+.pinterest {
+    margin-top: .08rem;
+}
+
+.pinterest .panel-top {
+    background-image: url(../images/pinterest-back.png);
+    background-size: 100% 77%;
+    background-repeat: no-repeat;
+}
+
+.newsList .time {
+    font-size: .12rem;
+    color: #ccc;
+    margin-top: .04rem;
+}
+
+.downloadImg {
+    display: flex;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    z-index: 998;
+}
+
+/*返回顶部*/
+.toTop {
+    position: fixed;
+    right: .125rem;
+    bottom: .84rem;
+    width: .6rem;
+    height: .6rem;
+    z-index: 999;
+    display: none;
+}
+
+.toTop img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/*page*/
+
+.laypage_main {
+    font-size: 0;
+    clear: both;
+    color: #666;
+}
+
+.laypage_main * {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+}
+
+.laypage_main a {
+    height: 26px;
+    line-height: 26px;
+    text-decoration: none;
+    color: #666;
+}
+
+.laypage_main a, .laypage_main span {
+    margin: 0 3px 6px;
+    padding: 0 10px;
+}
+
+.laypage_main span {
+    height: 26px;
+    line-height: 26px;
+}
+
+.laypage_main input, .laypage_main button {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.laypage_main input {
+    width: 40px;
+    height: 26px;
+    line-height: 26px;
+    margin: 0 5px;
+    padding: 0 5px;
+}
+
+.laypage_main button {
+    height: 28px;
+    line-height: 28px;
+    margin-left: 5px;
+    padding: 0 10px;
+    color: #666;
+}
+
+.laypageskin_default {
+    color: #333;
+    text-align: center;
+}
+
+.laypageskin_default a, .laypageskin_yahei span {
+    padding: 0 .08rem;
+    border-radius: 2px;
+    background-color: #eee;
+}
+
+.laypageskin_default .laypage_curr {
+    background-color: #333;
+    color: #fff;
+}

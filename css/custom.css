@@ -1,0 +1,14 @@
+.setfieldSubmit {
+    background: red !important;
+}
+
+.signup .signup-main .signup-content {
+    background: url("http://img.cjyun.org/a/10008/202109/941f5bee66b7cff7d6408c61d1cdd325.jpeg") no-repeat;
+    background-size: 100% 100%;
+    height: 3080px;
+    padding: 1em 2em 1em;
+}
+
+.body-signup select, .dataAll .signupList input[type=text] {
+    background: #fff !important;
+}

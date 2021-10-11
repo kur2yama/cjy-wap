@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title></title>
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/css/laypage.css"/>
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/political/political.css"/>
+    <script type="text/javascript" src="//res.cjyun.org/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/base.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/echo.min.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/vue.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/laypage.js"></script>
+</head>
+<style>
+    .contentList ul .list {
+        border-bottom: 1px solid #f0f0f0;
+    }
+</style>
+<body>
+<div id="app">
+    <div>
+        <div class="contentList">
+            <ul>
+                {list id="$_GET[id]" page="1" pagesize="999"}
+                <li class="list">
+                    <a class="list-a" href="{$r['url']}"></a>
+                    <div class="title">
+                        <p>{$r['title']}</p>
+                        <span>{timeToString($r['time'])}</span>
+                    </div>
+                    <!-- {if !empty($r['thumb'])} -->
+                    <img src="{$assets}newHome/images/blank.gif" data-echo="{thumb($r['thumb'])}" alt="">
+                    <!-- {/if} -->
+                </li>
+                {/list}
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {}
+        },
+        created() {
+
+        },
+        mounted() {
+            this.echoInit()
+        },
+        methods: {
+            echoInit() {
+                Echo.init({
+                    offset: 0,
+                    throttle: 0
+                });
+            },
+        }
+
+    })
+</script>
+</html>

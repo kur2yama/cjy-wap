@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="//unpkg.com/element-ui@2.15.6/lib/theme-chalk/index.css">
+    <script src="//unpkg.com/vue/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.15.6/lib/index.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto" infinite-scroll-immediate="false" infinite-scroll-distance="16000">
+        <li v-for="i in count" class="infinite-list-item">{{ i }}</li>
+    </ul>
+</div>
+
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                count: 100
+            }
+        },
+        methods: {
+            load() {
+                this.count += 100
+            }
+        }
+    })
+</script>
+</html>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        font-size: 60px;
+        height: 100%;
+    }
+
+    ul {
+        height: 100vh;
+        text-align: center;
+    }
+
+    li {
+        height: 200px;
+        line-height: 200px;
+    }
+</style>

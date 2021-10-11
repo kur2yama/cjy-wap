@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>模版</title>
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/css/laypage.css"/>
+    <link rel="stylesheet" href="./css/political.css"/>
+    <script type="text/javascript" src="//res.cjyun.org/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/base.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/echo.min.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/vue.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/laypage.js"></script>
+</head>
+<body>
+<div id="app">
+
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+
+            }
+        },
+        created() {
+        },
+        mounted() {
+        },
+        methods: {
+            getQueryVariable(variable) {
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) {
+                        return pair[1];
+                    }
+                }
+                return false;
+            },
+        }
+
+    })
+</script>
+</html>

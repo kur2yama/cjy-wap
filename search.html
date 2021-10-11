@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title><?= $menu['title'] ?: $site['title'] ?></title>
+    <meta name="keywords" content="{$menu['keyword']}"/>
+    <meta name="description" content="{$menu['description']}"/>
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/css/menu.css?20210910"/>
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/css/laypage.css"/>
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/css/search.css?202109091"/>
+    <script type="text/javascript" src="//res.cjyun.org/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/base.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/echo.min.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/vue.js"></script>
+    <script src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/js/laypage.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="searchPage">
+        <div class="searchArea">
+            <img class="icon" src="{$assets}newHome/images/search.png" alt="">
+            <input type="text" class="innerInput" placeholder="请输入关键字" v-model="searchVal" @keyup.enter="searchEnter">
+            <span class="cancel" @click="goBack">取消</span>
+        </div>
+    </div>
+    <div class="topHeader">
+        <!--    头部搜索栏-->
+        <header>
+            <img class="logo" src="{$assets}newHome/images/logo.png" alt="">
+            <img class="search" src="{$assets}newHome/images/search.png" alt="">
+            <input class="searchInput" placeholder="输入你想搜索的内容" @click="openSearchPage" readonly>
+        </header>
+        <!--    菜单栏-->
+        <div :class=" menuListOpen?'menu openMenu':'menu'" v-cloak>
+            <div class="overflowBox" v-show="!menuListOpen">
+                <ul>
+                    <li :class="item.className" v-for="item in menuList"><a :href=`${item.href}`>{{item.title}}</a></li>
+                </ul>
+            </div>
+            <div class="innerBox" v-show="menuListOpen">
+                <ul>
+                    <li v-for="item in menuList" :class="item.className">
+                        <a :href=`${item.href}`>
+                            {{item.title}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="expand" @click="openMenu">
+                <span class="font" v-show="menuListOpen">收起</span>
+                <img id="select" :class="menuListOpen?'in_transform select':'out_transform select'" src="{$assets}newHome/images/select.png">
+            </div>
+        </div>
+    </div>
+    <div class="search-wd">
+        "<span>{$wd}</span>"搜索结果&nbsp;共&nbsp;{$total}&nbsp;个
+    </div>
+    <div class="contentList menuTemp">
+        <ul>
+            <!--{if $total > 0}-->
+            <!--{loop $list $data}-->
+
+            <?php
+            $title = \Core\Core::strcut($data['_source']['title'], 30);
+            $title = preg_replace('#('.$wd.')#', '<em>$1</em>', $title);
+            $description = \Core\Core::strcut($data['_source']['description'], 100);
+            $description = preg_replace('#('.$wd.')#', '<em>$1</em>', $description);
+            $row = \Core\Factory::table('content_detail')->get(array('contentid' => $data['_id']), true);
+            $url = $row['url'];
+            ?>
+
+            <li class="list">
+                <a class="list-a" href="{$url}"></a>
+                <!--{if $data['_source']['thumb'] === 1}-->
+                <?php
+                $thumbUrl = json_decode($row['thumb'], true);
+                $thumbUrl = $data['_source']['appid'] == 2 ? $thumbUrl[0] : $thumbUrl;
+                ?>
+                <!--{if $thumbUrl}-->
+                <img src="{$assets}newHome/images/blank.gif" data-echo="<?=\Core\Core::thumb($thumbUrl, 160, 120)?>" alt="">
+                <!--{/if}-->
+                <!--{/if}-->
+                <div class="title">
+                    <p>{$title}</p>
+                    <span class="time2Text">{date("H:i",$data['_source']['published'])}</span>
+                </div>
+            </li>
+            <!--{/loop}-->
+            <!--{/if}-->
+        </ul>
+    </div>
+    <div id="pages" style="margin-top:15px;"></div>
+
+    <!--    引导下载-->
+    <a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.wondertek.cj_yun">
+        <img class="downloadImg" src="http://img.cjyun.org/a/thumb/10008/201906/75ffd65e98390946bc9dd795be1a3c99.jpeg!w640_h128.jpeg" alt="">
+    </a>
+    <!--返回顶部-->
+    <!--<div class="toTop">-->
+    <!--    <img src="{$assets}newHome/images/toTop.png" alt="" width="100" height="100">-->
+    <!--</div>-->
+</div>
+
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                searchVal: "",
+                menuListId: "",
+                wd: "",
+                menuListOpen: false,
+                menuList: [
+                    {className: "shouye", listid: "index", href: "/testindex", title: "首页"},
+                    {className: "zhibo", listid: "1342", href: "/testindex?listid=1342&bannerid=2413", title: "直播"},
+                    // {className: "zhengqing", listid: "556", href: "?listid=556&bannerid=574", title: "政情"},
+                    // {className: "sixiang", listid: "2658", href: "/testindex?listid=2658&bannerid=170", title: "思享"},
+                    // {className: "shiping", listid: "176", href: "/testindex?listid=176&bannerid=175", title: "视频"},
+                    {className: "hubei", listid: "2362", href: "/testindex?listid=2362&bannerid=2361", title: "湖北"},
+                    // {className: "guoji", listid: "73", href: "/testindex?listid=73&bannerid=72", title: "国际"},
+                    // {className: "hubeixinwen", listid: "2215", href: "/testindex?listid=2215&bannerid=2214", title: "湖北新闻"},
+                    {className: "jiankang", listid: "2460", href: "/testindex?listid=2460&bannerid=2484", title: "健康"},
+                    {className: "jiaoyu", listid: "2590", href: "/testindex?listid=2590&bannerid=2608", title: "教育"},
+                    {className: "wenlv", listid: "2633", href: "/testindex?listid=2633&bannerid=2635", title: "文旅"},
+                    {className: "xiangcun", listid: "2522", href: "/testindex?listid=2522&bannerid=2612", title: "乡村"},
+                    {className: "shequ", listid: "2535", href: "/testindex?listid=2535&bannerid=2625", title: "社区"},
+                    {className: "chuxing", listid: "2603", href: "/testindex?listid=2603&bannerid=2604", title: "出行"},
+                    {className: "yingyue", listid: "2857", href: "/testindex?listid=2857&bannerid=2671", title: "音乐"},
+                    {className: "laoyou", listid: "2867", href: "/testindex?listid=2867&bannerid=2643", title: "老友"},
+                ]
+            }
+        },
+        created: function () {
+            this.menuListId = this.getQueryVariable("listid")
+            this.wd = this.getQueryVariable("wd")
+        },
+        mounted: function () {
+            this.menuActive()
+            this.echoInit()
+            this.toTop()
+            this.initPage()
+
+            this.menuList.forEach(i => {
+                if (!this.menuListId && !this.wd) {
+                    $(".shouye").addClass("active")
+                    // } else if (this.menuListId === "zhengqing") {
+                    //     $(".zhengqing").addClass("active")
+                } else {
+                    if (i.listid === this.menuListId) {
+                        $(`.${i.className}`).addClass("active")
+                        var dom = $(".menu .overflowBox .active")[0]
+                        $(".menu .overflowBox ul").animate({scrollLeft: dom.offsetLeft - 20})
+                    }
+                }
+            })
+        },
+        watch: {},
+        methods: {
+            //菜单切换
+            menuActive() {
+                $('.menu li').each(function () {
+                    $(this).on('click', function () {
+                        $(this).siblings('li').removeClass('active');
+                        $(this).addClass('active');
+                    })
+                })
+            },
+            //搜索页
+            openSearchPage() {
+                $(".g-container").addClass("banScroll")
+                $(".searchPage").animate({"right": "0"})
+                $(".innerInput").focus()
+            },
+            //取消
+            goBack() {
+                this.searchVal = ""
+                $(".g-container").removeClass("banScroll")
+                $(".searchPage").animate({"right": "-100%"})
+            },
+            //搜索跳转
+            searchEnter() {
+                location.href = `http://m.hbtv.com.cn/s?wd=${this.searchVal}`
+            },
+            //处理时间
+            before_time(dateTimeStamp) {
+                var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
+                var hour = minute * 60;
+                var day = hour * 24;
+                var week = day * 7;
+                var halfamonth = day * 15;
+                var month = day * 30;
+                var year = day * 365;
+                var now = new Date().getTime(); //获取当前时间毫秒
+                var diffValue = now - dateTimeStamp * 1000; //时间差
+                if (diffValue < 0) {
+                    return;
+                }
+                var minC = diffValue / minute; //计算时间差的分，时，天，周，月
+                var hourC = diffValue / hour;
+                var dayC = diffValue / day;
+                var weekC = diffValue / week;
+                var monthC = diffValue / month;
+                var yearC = diffValue / year;
+                var result
+                if (dayC >= 1 && dayC <= 7) {
+                    result = " " + parseInt(dayC) + "天前";
+                } else if (hourC >= 1 && hourC <= 24) {
+                    result = " " + parseInt(hourC) + "小时前";
+                } else if (minC >= 1 && minC <= 60) {
+                    result = " " + parseInt(minC) + "分钟前";
+                } else if (diffValue >= 0 && diffValue <= minute) {
+                    result = "刚刚";
+                } else {
+                    var datetime = new Date();
+                    datetime.setTime(dateTimeStamp * 1000);
+                    var Nyear = datetime.getFullYear();
+                    var Nmonth =
+                        datetime.getMonth() + 1 < 10
+                            ? "0" + (datetime.getMonth() + 1)
+                            : datetime.getMonth() + 1;
+                    var Ndate =
+                        datetime.getDate() < 10
+                            ? "0" + datetime.getDate()
+                            : datetime.getDate();
+                    var Nhour =
+                        datetime.getHours() < 10
+                            ? "0" + datetime.getHours()
+                            : datetime.getHours();
+                    var Nminute =
+                        datetime.getMinutes() < 10
+                            ? "0" + datetime.getMinutes()
+                            : datetime.getMinutes();
+                    var Nsecond =
+                        datetime.getSeconds() < 10
+                            ? "0" + datetime.getSeconds()
+                            : datetime.getSeconds();
+                    result = Nyear + "-" + Nmonth + "-" + Ndate;
+                }
+                return result;
+            },
+            echoInit() {
+                Echo.init({
+                    offset: 0,
+                    throttle: 0
+                });
+            },
+            openMenu() {
+                this.menuListOpen = !this.menuListOpen
+                if (this.menuListOpen) {
+                    $(".menu").animate({"height": "2rem"})
+                } else {
+                    $(".menu").animate({"height": ".45rem"})
+                }
+            },
+            getQueryVariable(variable) {
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) {
+                        return pair[1];
+                    }
+                }
+                return false;
+            },
+            toTop() {
+                $(window).scroll(function () {
+                    var $scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop; //兼容浏览器
+                    if ($scrollTop > 100) { //滚动高度可调
+                        $(".toTop").show();
+                    } else {
+                        $(".toTop").hide();
+                    }
+                    ;
+                })
+                $(".toTop").on("click", function () {
+                    $("html,body").stop().animate({
+                        scrollTop: 0
+                    });
+                })
+            },
+            initPage() {
+                var wd = '{$wd}';
+                var pagesize = {$pagesize};
+                var total = {$total};
+                var pages = Math.ceil(total / pagesize);
+                var alias = "<?= isset($alias) ? $alias : 'all'?>";
+                if (total > 0) {
+                    laypage({
+                        cont: document.getElementById('pages'),
+                        pages: pages,
+                        curr: function () {
+                            var page = location.search.match(/page=(\d+)/);
+                            return page ? page [1] : 1;
+                        }(),
+                        jump: function (e, first) {
+                            if (!first) {
+                                location.href = '?alias=' + alias + '&wd=' + wd + '&page=' + e.curr;
+                            }
+                        },
+                        groups: 5
+                    });
+                }
+            }
+        }
+    })
+</script>
+</html>
