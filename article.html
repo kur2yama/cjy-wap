@@ -294,6 +294,78 @@
 
 
     </script>
+
+
+    <!--    导航菜单-->
+    <link rel="stylesheet" href="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/css/menu-p.css?20211011"/>
+    <div id="Menu" class="menu">
+        <div class="overflowBox">
+            <ul class="menuDom">
+            </ul>
+        </div>
+        <div class="innerBox hide">
+            <ul class="menuDom">
+            </ul>
+        </div>
+
+        <div class="expand" onclick="openMenu()">
+            <span class="font hide">收起</span>
+            <img id="select" class="out_transform select"
+                 src="//res.cjyun.org/t/site/10008/6fd52b21978e4534397ad7bea6ec6b0d/assets/newHome/images/select.png">
+        </div>
+    </div>
+    <script>
+        var menuList = [
+            {className: "shouye", listid: "index", href: "/testindex", title: "首页"},
+            {className: "zhibo", listid: "1342", href: "/testindex?listid=1342&bannerid=2413", title: "直播"},
+            // {className: "zhengqing", listid: "556", href: "?listid=556&bannerid=574", title: "政情"},
+            // {className: "sixiang", listid: "2658", href: "/testindex?listid=2658&bannerid=170", title: "思享"},
+            // {className: "shiping", listid: "176", href: "/testindex?listid=176&bannerid=175", title: "视频"},
+            {className: "hubei", listid: "2362", href: "/testindex?listid=2362&bannerid=2361", title: "湖北"},
+            // {className: "guoji", listid: "73", href: "/testindex?listid=73&bannerid=72", title: "国际"},
+            // {className: "hubeixinwen", listid: "2215", href: "/testindex?listid=2215&bannerid=2214", title: "湖北新闻"},
+            {className: "jiankang", listid: "2460", href: "/testindex?listid=2460&bannerid=2484", title: "健康"},
+            {className: "jiaoyu", listid: "2590", href: "/testindex?listid=2590&bannerid=2608", title: "教育"},
+            {className: "wenlv", listid: "2633", href: "/testindex?listid=2633&bannerid=2635", title: "文旅"},
+            {className: "xiangcun", listid: "2522", href: "/testindex?listid=2522&bannerid=2612", title: "乡村"},
+            {className: "shequ", listid: "2535", href: "/testindex?listid=2535&bannerid=2625", title: "社区"},
+            {className: "chuxing", listid: "2603", href: "/testindex?listid=2603&bannerid=2604", title: "出行"},
+            {className: "yingyue", listid: "2857", href: "/testindex?listid=2857&bannerid=2671", title: "音乐"},
+            {className: "laoyou", listid: "2867", href: "/testindex?listid=2867&bannerid=2643", title: "老友"},
+        ];
+        var menuDom = "";
+
+        menuList.forEach(i => {
+            menuDom += `<li class=${i.className}><a href=${i.href}>${i.title}</a></li>`
+        });
+        $(".menuDom").html(menuDom);
+
+        var menuListOpen = false
+        $("#Menu>.overflowBox").show()
+
+        function openMenu() {
+            menuListOpen = !menuListOpen
+            if (menuListOpen) {
+                $("#Menu").addClass("openMenu");
+                $("#Menu .expand .font").show();
+                $("#Menu .overflowBox").hide();
+                $("#Menu .innerBox").show();
+                $("#select").removeClass("out_transform");
+                $("#select").addClass("in_transform");
+                $("#Menu").animate({"height": "200px"});
+            } else {
+                $("#Menu").removeClass("openMenu");
+                $("#Menu .expand .font").hide();
+                $("#Menu .overflowBox").show();
+                $("#Menu .innerBox").hide();
+                $("#select").removeClass("in_transform");
+                $("#select").addClass("out_transform");
+                $("#Menu").animate({"height": "45px"});
+            }
+        }
+    </script>
+
+
     <header>
         <div class="a-title">
             <h1>直播预告丨今晚江南三大名楼为你爆灯，还有超值福利！</h1>

@@ -1,0 +1,194 @@
+/*顶部菜单*/
+.menu {
+    height: 45px;
+    border-bottom: 1px solid #f3f3f3;
+    font-size: 15px;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.05);
+}
+
+.menu .select {
+    width: 20px;
+    height: 20px;
+    transform: rotateZ(0deg);
+}
+
+.menu .overflowBox {
+    width: 88%;
+    height: 45px;
+    overflow: hidden;
+    margin: 0 5px;
+}
+
+.menu .overflowBox ul {
+    width: 100%;
+    height: 53px;
+    color: #747373;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.menu .overflowBox ul li {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    width: auto;
+    margin: -8px 10px 0;
+}
+
+.menu .overflowBox ul li a {
+    color: #717171;
+}
+
+.menu .overflowBox ul li.active {
+    color: #CC4134;
+    position: relative;
+}
+
+.menu .overflowBox ul .active a {
+    color: #CC4134;
+}
+
+.menu .overflowBox ul li.active::after {
+    display: block;
+    content: "";
+    height: 3px;
+    width: 50%;
+    margin: 0 auto;
+    background-color: #CC4134;
+    position: absolute;
+    left: 25%;
+    bottom: 8px;
+    border-radius: 3px;
+}
+
+.menu .expand {
+    height: 20px;
+}
+
+.menu .select.in_transform {
+    transform: rotateZ(180deg);
+    -ms-transform: rotateZ(180deg); /* IE9 */
+    -moz-transform: rotateZ(180deg); /* Firefox */
+    -webkit-transform: rotateZ(180deg); /* Safari和Chrome */
+    -o-transform: rotateZ(180deg); /* Opera */
+    transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out; /*Firefox 4 */
+    -webkit-transition: all 0.5s ease-in-out; /* Safari和Chrome */
+    -o-transition: all 0.5s ease-in-out; /* Opera */
+}
+
+.menu .select.out_transform {
+    transform: rotateZ(0deg);
+    -ms-transform: rotateZ(0deg); /* IE9 */
+    -moz-transform: rotateZ(0deg); /* Firefox */
+    -webkit-transform: rotateZ(0deg); /* Safari和Chrome */
+    -o-transform: rotateZ(0deg); /* Opera */
+    transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out; /*Firefox 4 */
+    -webkit-transition: all 0.5s ease-in-out; /* Safari和Chrome */
+    -o-transition: all 0.5s ease-in-out; /* Opera */
+}
+
+.openMenu .expand {
+    align-self: flex-end;
+    display: flex;
+    margin-right: 15px;
+}
+
+.menu .innerBox {
+    width: 100%;
+    padding: 15px 7.5px;
+}
+
+.openMenu .innerBox ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.openMenu .innerBox ul li {
+    width: 75px;
+    height: 30px;
+    margin: 7.5px;
+    border: 1px solid #979797;
+    text-align: center;
+    line-height: 30px;
+    position: relative;
+}
+
+.openMenu .innerBox ul li > a {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.openMenu a, .openMenu {
+    color: #717171 !important;
+}
+
+.openMenu {
+    flex-direction: column;
+    font-weight: 400;
+}
+
+.openMenu .font {
+    margin-right: 9.5px
+}
+
+.openMenu .innerBox .active {
+    border: 1px solid #CC4134;
+}
+
+.openMenu .innerBox .active a {
+    color: #CC4134 !important;
+}
+
+/*搜索页*/
+.searchPage {
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    right: -100%;
+}
+
+.searchPage .searchArea {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 5px 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.searchPage .searchArea .icon {
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 20px;
+}
+
+.searchPage .searchArea .innerInput {
+    width: 88%;
+    background-color: #e5e5e5;
+    border: none;
+    outline: none;
+    height: 30px;
+    /*border-radius: 20px;*/
+    text-indent: 3em;
+}
+
+.searchPage .searchArea > span {
+    font-size: 16px;
+    margin-left: 7px;
+}
